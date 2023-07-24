@@ -1,0 +1,62 @@
+/*ШРИФТЫ*/
+/*MONTSERRAT*/
+@font-face {
+    font-family: 'Montserrat-SemiBold';
+    font-style: normal;
+    font-weight: normal;
+    src: local('Montserrat-SemiBold'),
+    url('../fonts/Montserrat/static/Montserrat-SemiBold.woff') format('woff'),
+    url('../fonts/Montserrat/static/Montserrat-SemiBold.ttf') format('ttf');
+}
+
+@font-face {
+    font-family: 'Montserrat-Bold';
+    font-style: normal;
+    font-weight: bold;
+    src: local('Montserrat-Bold'),
+    url('../fonts/Montserrat/static/Montserrat-Bold.woff') format('woff'),
+    url('../fonts/Montserrat/static/Montserrat-Bold.ttf') format('ttf');
+}
+
+/*LORA*/
+@font-face {
+    font-family: 'Lora-Regular';
+    font-style: normal;
+    font-weight: normal;
+    src: local('Lora-Regular'),
+    url('../fonts/Lora/static/Lora-Regular.woff') format('woff'),
+    url('../fonts/Lora/static/Lora-Regular.ttf') format('ttf');
+}
+
+table {
+    font-family: "Montserrat-SemiBold";
+    font-size: 14px;
+    border-collapse: collapse;
+    text-align: left;
+}
+
+th, td:first-child {
+    background: #234ffd;
+    color: white;
+    padding: 10px 20px;
+}
+
+th, td {
+    border-style: solid;
+    border-width: 0 1px 1px 0;
+    border-color: black;
+}
+
+td {
+    padding-left: 5px;
+    background: #eef7ff;
+}
+
+th:first-child, td:first-child {
+    text-align: left;
+}
+
+.itog {
+    font-family: "Montserrat-Bold";
+    font-size: 16px;
+}

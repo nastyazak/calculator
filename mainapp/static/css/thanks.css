@@ -1,0 +1,245 @@
+/*MONTSERRAT*/
+@font-face {
+    font-family: 'Montserrat-SemiBold';
+	font-style: normal;
+	font-weight: normal;
+	src: local('Montserrat-SemiBold'),
+		url('../fonts/Montserrat/static/Montserrat-SemiBold.woff') format('woff'),
+        url('../fonts/Montserrat/static/Montserrat-SemiBold.ttf') format('ttf');
+}
+
+@font-face {
+    font-family: 'Montserrat-Bold';
+	font-style: normal;
+	font-weight: bold;
+	src: local('Montserrat-Bold'),
+		url('../fonts/Montserrat/static/Montserrat-Bold.woff') format('woff'),
+        url('../fonts/Montserrat/static/Montserrat-Bold.ttf') format('ttf');
+}
+
+/*LORA*/
+@font-face {
+    font-family: 'Lora-Regular';
+	font-style: normal;
+	font-weight: normal;
+	src: local('Lora-Regular'),
+		url('../fonts/Lora/static/Lora-Regular.woff') format('woff'),
+        url('../fonts/Lora/static/Lora-Regular.ttf') format('ttf');
+}
+
+* {
+	margin: 0;
+	padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+}
+
+/*шапка*/
+.header {
+	position: fixed;
+	top: 0;
+	width: 100%;
+	background: #000;
+    height: 70px;
+	box-shadow: 0 0 30px rgba(0,26,108,0.9);
+}
+
+.navigation {
+	width: 90%;
+	margin: 0 auto;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+/*логотип*/
+.info {
+    display: flex;
+    justify-content: space-between;
+}
+
+.logo {
+    width: 40px;
+    height: 40px;
+}
+
+.logo_img {
+    width: 100%;
+    height: 100%;
+}
+
+.logo_info {
+    margin-left: 15px;
+}
+
+.logo_text1 {
+    color: #fff;
+    font-family: 'Montserrat-SemiBold';
+    font-size: 14px;
+    letter-spacing: 0.17em;
+    margin-top: 2px;
+}
+
+.logo_text2 {
+    color: #fff;
+    font-family: 'Lora-Regular';
+    font-size: 13px;
+    margin-top: 5px;
+}
+
+/*меню сайта*/
+.menu {
+    font-size: 12px;
+    letter-spacing: 0.15em;
+}
+
+ul {
+  list-style: none;
+  float: right;
+  line-height: 70px;
+  text-align:center;
+}
+
+li a {
+  text-decoration: none;
+  display: inline-block;
+  position: relative;
+  color: #fff;
+  text-transform: uppercase;
+}
+
+li {
+  display: inline-block;
+  margin-left: 40px;
+  transition: .5s linear;
+}
+
+li a:after {
+  content: "";
+  width: 0;
+  height: 2px;
+  position: absolute;
+  left: 0;
+  bottom: 20px;
+  background: #4d8bef;
+  transition: all 0.3s linear;
+}
+
+li a:hover:after{
+  width: 100%;
+}
+
+/*главный экран*/
+.main {
+	width: 100%;
+    height: 650px;
+    margin-top: 0;
+    background:
+            linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+            url("../img/2.jpg") center center no-repeat;
+    /*background:
+            linear-gradient(rgba(0, 1, 52, 0.5), rgba(0, 1, 73, 0.5)),
+            url("../img/back11.jpg") center center no-repeat;*/
+    background-size: cover;
+}
+
+/*блок информации*/
+.greetings {
+	width: 80%;
+	margin: 0 auto;
+    padding-top: 19%;
+}
+
+.main_title, .main_text {
+	text-align: center;
+	color: white;
+}
+
+.main_title {
+    font-family: 'Montserrat-Bold';
+    font-size: 45px;
+    letter-spacing: 0.2em;
+}
+
+.main_text {
+    margin-top: 30px;
+    font-family: 'Lora-Regular';
+    font-size: 16px;
+    line-height: 1.3;
+}
+
+.btn {
+    margin: 6% auto 0;
+    display: flex;
+    justify-content: center;
+}
+
+.btn a {
+    text-align: center;
+    width: 12%;
+    text-decoration: none;
+    color: #fff;
+    text-transform: uppercase;
+}
+
+.html {
+    margin-right: 90px;
+    background-image: linear-gradient(-225deg, rgba(255,23,23,1) 0%, rgba(255,169,0,1) 35%, rgba(255,143,0,1) 71%, rgba(255,238,0,1));
+}
+
+.pdf {
+    margin-right: 90px;
+    background-image: linear-gradient(-225deg, #ff0087 0%, #FF1361 29%, #a00088 67%, #cd1b58 100%);
+}
+
+.download {
+    background-image: linear-gradient(-225deg, #ff95ff 0%, #ffbef6 35%, #da6eff 71%, #ad00ff 100%);
+}
+
+.button {
+    border: 0;
+  text-decoration: none;
+  display: inline-block;
+  padding: 20px 40px;
+  margin-top: 35px;
+  border-radius: 40px;
+  background-position: 100% 0;
+  background-size: 200% 200%;
+  font-family: 'Montserrat-Bold', sans-serif;
+  font-size: 15px;
+  color: white;
+  box-shadow: 0 16px 32px 0 rgba(0, 40, 120, .35);
+    cursor: pointer;
+  transition: .5s;
+}
+
+.button:hover {
+  box-shadow: 0 0 0 0 rgba(0, 40, 120, 0);
+  background-position: 0 0;
+}
+
+/*подвал*/
+.footer {
+	padding-top: 1px;
+	padding-bottom: 1px;
+    height: 150px;
+    background-color: #030030;
+}
+
+.basement {
+	width: 90%;
+	margin: 0 auto;
+    margin-top: 60px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.footer_dis {
+    color: #fff;
+    font-family: 'Lora-Regular';
+    font-size: 12px;
+}
