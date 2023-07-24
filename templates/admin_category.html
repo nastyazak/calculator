@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" crossorigin="anonymous">
+    <title>Категории</title>
+</head>
+<body>
+<section style="margin: 30px">
+    <h1>Категории</h1>
+    <div class="time-work">
+        <table class="table table-hover" id="pricelist">
+            <tr>
+                <th scope="col">Категория</th>
+                <th scope="col">Вид категории</th>
+                <th scope="col">Действие</th>
+            </tr>
+            {% for category in categories %}
+                <tr>
+                    <td>{{ category.name_category }}</td>
+                    <td>{{ category.category_view }}</td>
+                    <td>
+                        <a class="btn btn-outline-warning" style="margin-bottom: 10px" href="{% url 'update_category' category.id %}">Изменить</a><br>
+                        <a class="btn btn-outline-danger" href="{% url 'delete_category' category.id %}">Удалить</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
+    <a class="btn btn-outline-success" href="{% url 'add_category'%}">Создать новую категорию</a>
+</section>
+</body>
+</html>

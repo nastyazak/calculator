@@ -1,0 +1,134 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>Смета пользователя</title>
+    <style>
+        /*ШРИФТЫ*/
+        /*MONTSERRAT*/
+        @font-face {
+            font-family: 'Montserrat-SemiBold';
+            font-style: normal;
+            font-weight: normal;
+            src: local('Montserrat-SemiBold'),
+                url('{% static 'fonts/Montserrat/static/Montserrat-SemiBold.woff' %}') format('woff'),
+                url('{% static 'fonts/Montserrat/static/Montserrat-SemiBold.ttf' %}') format('ttf');
+        }
+
+        @font-face {
+            font-family: 'Montserrat-Bold';
+            font-style: normal;
+            font-weight: bold;
+            src: local('Montserrat-Bold'),
+                url('{% static 'fonts/Montserrat/static/Montserrat-Bold.woff' %}') format('woff'),
+                url('{% static 'fonts/Montserrat/static/Montserrat-Bold.ttf' %}') format('ttf');
+        }
+
+        /*LORA*/
+        @font-face {
+            font-family: 'Lora-Regular';
+            font-style: normal;
+            font-weight: normal;
+            src: local('Lora-Regular'),
+                url('{% static 'fonts/Lora/static/Lora-Regular.woff' %}') format('truetype'),
+                url('{% static 'fonts/Lora/static/Lora-Regular.ttf' %}') format('truetype');
+        }
+
+        h1 {
+            font-family: "Montserrat-Bold";
+            font-size: 30px;
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        p {
+            font-family: "Lora-Regular";
+            font-size: 16px;
+            text-align: center;
+            margin-top: 10px;
+        }
+
+        table {
+            margin-top: 10px;
+            font-family: "Montserrat-SemiBold";
+            font-size: 14px;
+            border-collapse: collapse;
+            text-align: left;
+        }
+
+        th {
+            background: #234ffd;
+            color: white;
+            padding: 10px 20px;
+        }
+
+        th, td {
+            border-style: solid;
+            border-width: 0 1px 1px 0;
+            border-color: black;
+        }
+
+        td {
+            padding-left: 5px;
+            background: #eef7ff;
+        }
+
+        th:first-child, td:first-child {
+            text-align: left;
+        }
+
+        .itog {
+            font-family: "Montserrat-Bold";
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Уважаемый(ая) {{ user.first_name }}!</h1>
+    <p>Смета по выбранным Вами данным готова. Можете ознакомиться с результатами ниже.</p>
+    <table border="1" id="pricelist">
+        <tr>
+            <th>Вид работы</th>
+            <th>Категория</th>
+            <th>Описание</th>
+            <th>Трудозатраты, час</th>
+            <th>Стоимость нормо-часа, руб</th>
+            <th>Стоимость, руб</th>
+        </tr>
+        {% for work in works %}
+            {% for type in types %}
+                {% if type.id == work.id_work_id %}
+                    <tr>
+                        <td>{{ type.name_work }}</td>
+                        <td>{% for category in categories %}
+                                {% if category.id == type.category_id %}
+                                    {{ category.name_category }}
+                                {% endif %}
+                        {% endfor %}<br></td>
+                        <td>{{ type.work_descrip }}</td>
+                        <td>{{ type.hours }}</td>
+                        <td>{{ type.price }}</td>
+                        <td class="quantity">{{ type.cost }}</td>
+                    </tr>
+                {% endif %}
+            {% endfor %}
+        {% endfor %}
+        <tr>
+            <td class="itog">Итоговая стоимость</td>
+            <td colspan="4"></td>
+            <td class="itog"><span id="total">0</span></td>
+        </tr>
+    </table>
+<script>
+    var table = document.querySelector('#pricelist');
+    var tds = table.querySelectorAll('.quantity');
+
+    var sum = 0;
+    for (var i = 0; i < tds.length; i++) {
+        sum += Number(tds[i].innerHTML);
+        total.innerHTML = sum;
+    }
+</script>
+</body>
+</html>

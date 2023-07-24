@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" crossorigin="anonymous">
+    <title>Рааботы</title>
+</head>
+<body>
+<section style="margin: 30px">
+    <h1>Работы</h1>
+    <div class="time-work">
+        <table class="table table-hover" id="pricelist">
+            <tr>
+                <th scope="col">Название работы</th>
+                <th scope="col">Описание</th>
+                <th scope="col">Категория</th>
+                <th scope="col">Трудозатраты</th>
+                <th scope="col">Стоимость нормо-часа</th>
+                <th scope="col">Итоговая стоимость</th>
+                <th scope="col">Действие</th>
+            </tr>
+            {% for work in works %}
+                <tr>
+                    <td>{{ work.name_work }}</td>
+                    <td>{{ work.work_descrip }}</td>
+                    <td>{{ work.category }}</td>
+                    <td>{{ work.hours }}</td>
+                    <td>{{ work.price }}</td>
+                    <td>{{ work.cost }}</td>
+                    <td>
+                        <a class="btn btn-outline-warning" style="margin-bottom: 10px" href="{% url 'update_work' work.id %}">Изменить</a><br>
+                        <a class="btn btn-outline-danger" href="{% url 'delete_work' work.id %}">Удалить</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
+    <a class="btn btn-outline-success" href="{% url 'add_work'%}">Создать новую работу</a>
+</section>
+</body>
+</html>

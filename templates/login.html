@@ -1,0 +1,44 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{% static 'css/logins.css' %}">
+    <title>Авторизация</title>
+</head>
+<body>
+    <header id="header" class="header">
+        <div class="navigation">
+            <div class="info">
+                <div class="logo">
+                    <a href="#"><img class="logo_img" src="{% static "img/logo1.svg" %}" alt="logo"></a>
+                </div>
+                <div class="logo_info">
+                    <p class="logo_text1">COST_OF_SITE</p>
+                    <p class="logo_text2">Онлайн-калькулятор</p>
+                </div>
+            </div>
+            <ul class="menu">
+                <li><a href="{% url 'calculation' %}">На главную</a></li>
+            </ul>
+        </div>
+    </header>
+    <section class="all">
+        <h1>Авторизация</h1>
+        <form method="POST">
+            {% csrf_token %}    <!-- добавляется токен для защиты -->
+            <div class="block">
+                <label for="id_username">Имя пользователя:</label><br>
+                <input type="text" name="username" maxlength="150" required id="id_username">
+            </div>
+            <div class="block">
+                <label for="id_password">Пароль:</label><br>
+                <input type="password" name="password" required id="id_password">
+            </div>
+            <div class="but">
+                <input type="submit" class="button" value="Войти">
+            </div>
+        </form>
+    </section>
+</body>
+</html>

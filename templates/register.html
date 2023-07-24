@@ -1,0 +1,60 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{% static 'css/logins.css' %}">
+    <title>Регистрация</title>
+</head>
+<body>
+    <header id="header" class="header">
+        <div class="navigation">
+            <div class="info">
+                <div class="logo">
+                    <a href="#"><img class="logo_img" src="{% static "img/logo1.svg" %}" alt="logo"></a>
+                </div>
+                <div class="logo_info">
+                    <p class="logo_text1">COST_OF_SITE</p>
+                    <p class="logo_text2">Онлайн-калькулятор</p>
+                </div>
+            </div>
+            <ul class="menu">
+                <li><a href="{% url 'calculation' %}">На главную</a></li>
+            </ul>
+        </div>
+    </header>
+    <section class="all">
+        <h1>Регистрация</h1>
+        <form method="POST">
+            {% csrf_token %}
+            <div class="block">
+                <label for="id_username">Имя пользователя:</label>
+                <input type="text" name="username" maxlength="150" autofocus required id="id_username">
+            </div>
+            <div class="block">
+                <label for="id_first_name">Ваше имя:</label>
+                <input type="text" name="first_name" maxlength="30" id="id_first_name">
+            </div>
+            <div class="block">
+                <label for="id_email">Email:</label>
+                <input type="email" name="email" maxlength="254" required id="id_email">
+            </div>
+            <div class="block">
+                <label for="id_phone">Номер телефона:</label>
+                <input type="text" name="phone" maxlength="11" required id="id_phone">
+            </div>
+            <div class="block">
+                <label for="id_password1">Пароль:</label>
+                <input type="password" name="password1" autocomplete="new-password" required id="id_password1">
+            </div>
+            <div class="block">
+                <label for="id_password2">Подтверждение пароля:</label>
+                <input type="password" name="password2" autocomplete="new-password" required id="id_password2">
+            </div>
+            <div class="block but">
+                <input type="submit" class="button" value="Зарегистрироваться">
+            </div>
+        </form>
+    </section>
+</body>
+</html>

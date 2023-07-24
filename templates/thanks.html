@@ -1,0 +1,76 @@
+{% load static %}
+{% load auth_extras %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+    <link rel="stylesheet" href="{% static 'css/thanks.css' %}">
+	<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/3.3.4/vue.cjs.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.4.0/axios.js"></script>
+	<title>Спасибо</title>
+</head>
+<body>
+	<header id="header" class="header">
+		<div class="navigation">
+            <div class="info">
+                <div class="logo">
+                    <a href="#"><img class="logo_img" src="{% static "img/logo1.svg" %}" alt="logo"></a>
+                </div>
+                <div class="logo_info">
+                    <p class="logo_text1">COST_OF_SITE</p>
+                    <p class="logo_text2">Онлайн-калькулятор</p>
+                </div>
+            </div>
+            {% if request.user.is_superuser or request.user|has_group:"Администратор" %}
+                <ul class="menu">
+                    <li><a href="{% url 'calculation' %}">Калькулятор</a></li>
+                    <li><a href="#cont">Контакты</a></li>
+                    <li><a href="{% url 'admin_category' %}">Редактировать категории</a></li>
+                    <li><a href="{% url 'admin_work' %}">Редактировать работы</a></li>
+                    <li><a href="{% url 'logout' %}">Выйти</a></li>
+                </ul>
+            {% elif request.user.is_authenticated %}
+                <ul class="menu">
+                    <li><a href="{% url 'calculation' %}">Калькулятор</a></li>
+                    <li><a href="#cont">Контакты</a></li>
+                    <li><a href="{% url 'logout' %}">Выйти</a></li>
+                </ul>
+            {% else %}
+                <ul class="menu">
+                    <li><a href="{% url 'login' %}">Войти</a></li>
+                    <li><a href="{% url 'register' %}">Зарегистрироваться</a></li>
+                </ul>
+            {% endif %}
+		</div>
+	</header>
+	<section id="main" class="main">
+		<div class="greetings">
+			<h1 class="main_title">Спасибо! Ваша заявка уже у нас!</h1>
+            <div class="btn">
+                <a href="{% url 'estimate' %}" class="button html">Получить смету html</a>
+                <a href="{% url 'generate_pdf_estimate' %}" class="button pdf">Получить смету pdf</a>
+                <a href="{% url 'download_pdf_estimate' %}" class="button download">Скачать смету pdf</a>
+            </div>
+		</div>
+	</section>
+	<footer id="footer" class="footer">
+        <p><a name="cont"></a></p>
+		<div class="basement">
+            <div class="info">
+                <div class="logo">
+                    <a href="#"><img class="logo_img" src="{% static "img/logo1.svg" %}" alt="logo"></a>
+                </div>
+                <div class="logo_info">
+                    <p class="logo_text1">COST_OF_SITE</p>
+                    <p class="logo_text2">Онлайн-калькулятор</p>
+                </div>
+            </div>
+            <div class="footer_dis">
+                <p class="dis">ⓒ Сайт создан в рамках выпускной квалификационной работы</p>
+            </div>
+		</div>
+	</footer>
+	<script src="js/script.js"></script>
+</body>
+</html>

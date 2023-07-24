@@ -1,0 +1,130 @@
+{% load static %}
+{% load auth_extras %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+    <link rel="stylesheet" href="{% static 'css/calculation.css' %}">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/3.3.4/vue.cjs.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.4.0/axios.js"></script>
+	<title>Калькулятор</title>
+</head>
+<body>
+    <header id="header" class="header">
+		<div class="navigation">
+            <div class="info">
+                <div class="logo">
+                    <a href="#"><img class="logo_img" src="{% static "img/logo1.svg" %}" alt="logo"></a>
+                </div>
+                <div class="logo_info">
+                    <p class="logo_text1">COST_OF_SITE</p>
+                    <p class="logo_text2">Онлайн-калькулятор</p>
+                </div>
+            </div>
+            {% if request.user.is_superuser or request.user|has_group:"Администратор" %}
+                <ul class="menu">
+                    <li><a href="#calcul">Калькулятор</a></li>
+                    <li><a href="#cont">Контакты</a></li>
+                    <li><a href="{% url 'admin_category' %}">Редактировать категории</a></li>
+                    <li><a href="{% url 'admin_work' %}">Редактировать работы</a></li>
+                    <li><a href="{% url 'logout' %}">Выйти</a></li>
+                </ul>
+            {% elif request.user.is_authenticated %}
+                <ul class="menu">
+                    <li><a href="#calcul">Калькулятор</a></li>
+                    <li><a href="#cont">Контакты</a></li>
+                    <li><a href="{% url 'logout' %}">Выйти</a></li>
+                </ul>
+            {% else %}
+                <ul class="menu">
+                    <li><a href="{% url 'login' %}">Войти</a></li>
+                    <li><a href="{% url 'register' %}">Зарегистрироваться</a></li>
+                </ul>
+            {% endif %}
+		</div>
+	</header>
+	<section id="main" class="main">
+		<div class="greetings">
+			<h1 class="main_title">ОЦЕНКА СТОИМОСТИ ПРОЕКТА</h1>
+			<p class="main_text">Для определения стоимостной оценки прежде всего необходимо определить операции
+                (пакет операций), длительность операций и требуемые ресурсы.<br>Процесс оценки и его результат в
+                значительной степени зависят от точности описания содержания, качества доступной информации,
+                от стадии проекта.
+            </p>
+		</div>
+	</section>
+    {% if request.user.is_authenticated %}
+        <p><a name="calcul"></a></p>
+	<section id="templates" class="templates">
+    {% csrf_token %}
+    {% verbatim %}
+		<div id="app">
+			<div class="container">
+				<div class="left">
+                    <div v-for="(cat, index) in categories">
+                        <div class="block">
+                            <h2 class="title">{{ cat.name_category }}</h2>
+                                <div v-for="work in works">
+                                    <div class="clientChoice">
+                                         <div v-if="cat.id == work.category">
+                                            <div v-if="cat.category_view == 'radio'">
+                                                <div class="choice">
+                                                    <label class="custom-radio">
+                                                        <input type="radio" :name="cat.name_category" :value="work" v-model="selected_works[index]">
+                                                        <span>{{ work.name_work }}</span>
+                                                        <div class="price">{{ work.cost }}<span> Р</span></div>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            <div v-else>
+                                                <div class="choice">
+                                                    <label class="custom-checkbox">
+                                                        <input type="checkbox" :value="work" v-model="selected_works[index]">
+                                                        <span>{{ work.name_work }}</span>
+                                                        <div class="price">{{ work.cost }}<span> Р</span></div>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                        </div>
+                    </div>
+				</div>
+				<div class="right">
+					<p class="title">Примерная стоимость:</p>
+                    <p class="cost">{{ sum }}<span>   Р</span></p>
+                    <div class="btn">
+                        <button class="button" @click="submit"><span>Получить смету</span></button>
+                    </div>
+				</div>
+			</div>
+		</div>
+	{% endverbatim %}
+	</section>
+    {% endif %}
+    <footer id="footer" class="footer">
+        <p><a name="cont"></a></p>
+		<div class="basement">
+            <div class="info">
+                <div class="logo">
+                    <a href="#"><img class="logo_img" src="{% static "img/logo1.svg" %}" alt="logo"></a>
+                </div>
+                <div class="logo_info">
+                    <p class="logo_text1">COST_OF_SITE</p>
+                    <p class="logo_text2">Онлайн-калькулятор</p>
+                </div>
+            </div>
+            <div class="footer_dis">
+                <p class="dis">ⓒ Сайт создан в рамках выпускной квалификационной работы</p>
+            </div>
+		</div>
+	</footer>
+<script>
+    var id_user = {{ request.user.id }}     <!--текущий пользователь (после регистрации/авторизации)-->
+</script>
+
+<script src="/static/js/script.js"></script>
+</body>
+</html>
